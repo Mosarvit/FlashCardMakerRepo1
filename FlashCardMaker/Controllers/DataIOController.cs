@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using FlashCardMaker.Models;
+using System.IO;
 
 namespace FlashCardMaker.Controllers
 {
@@ -19,9 +20,25 @@ namespace FlashCardMaker.Controllers
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            foreach (String str in fileNames)
+            foreach (String fileName in fileNames)
             {
-                stringBuilder.Append(str);
+                string fileExtention = Path.GetExtension(fileName);
+
+                stringBuilder.Append("fileName: ");
+                stringBuilder.Append(fileName);
+                stringBuilder.Append(" fileExtention: ");
+                stringBuilder.Append(fileExtention);
+                stringBuilder.Append(" isSRT: ");
+
+                if (fileExtention == ".srt")
+                {
+                    stringBuilder.Append(" yes ");
+                }
+                else
+                {
+                    stringBuilder.Append(" no ");
+                }
+
                 stringBuilder.Append("\n");
             }
             view.Print(stringBuilder.ToString());
